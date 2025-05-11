@@ -6,7 +6,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         // Criando hospital
-        Hospital hospital = new Hospital("Hospital Central");
+        Hospital hospital = new Hospital("Hospital das clinicas central");
 
         // Criando unidades
         Unidade unidade1 = new Unidade("Unidade Centro", "Rua Principal, 100");

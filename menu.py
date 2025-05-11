@@ -3,10 +3,10 @@ def exibir_menu():
     print("\n" + "="*50)
     print("MENU PRINCIPAL".center(50))
     print("="*50)
-    print("1. Adicionar item à lista")
-    print("2. Remover item da lista")
-    print("3. Buscar item na lista")
-    print("4. Listar todos os itens")
+    print("1. Solicitar senha para atendimento")
+    print("2. Solicitar tutorial de login")
+    print("3. Solicitar tutorial de chamada")
+    print("4. Solicitar chat com o médico (durante consulta, em caso de problemas)")
     print("5. Falar com o suporte")
     print("6. Sair")
     print("="*50)
@@ -29,88 +29,36 @@ def validar_opcao(opcoes_validas):
         except ValueError:
             print("Entrada inválida! Digite apenas números.")
 
-def adicionar_item(lista):
-    """
-    Adiciona um item à lista após validação
-    Parâmetros:
-        lista (list): Lista onde o item será adicionado
-    Retorna:
-        list: Lista atualizada
-    """
-    item = input("Digite o item a ser adicionado: ").strip()
-    if item:
-        lista.append(item)
-        print(f"Item '{item}' adicionado com sucesso!")
-    else:
-        print("Erro: Não é possível adicionar um item vazio.")
-    return lista
+def solicitar_senha():
+    """Gera uma senha de atendimento fictícia"""
+    import random
+    senha = f"P-{random.randint(1000, 9999)}"
+    print(f"\nSenha de atendimento gerada: {senha}")
+    print("Por favor, aguarde sua vez no sistema.")
 
-def remover_item(lista):
-    """
-    Remove um item da lista após validação
-    Parâmetros:
-        lista (list): Lista de onde o item será removido
-    Retorna:
-        list: Lista atualizada
-    """
-    if not lista:
-        print("A lista está vazia. Nada para remover.")
-        return lista
-    
-    print("Itens na lista:")
-    for i, item in enumerate(lista, 1):
-        print(f"{i}. {item}")
-    
-    while True:
-        try:
-            indice = int(input("Digite o número do item a ser removido: ")) - 1
-            if 0 <= indice < len(lista):
-                item_removido = lista.pop(indice)
-                print(f"Item '{item_removido}' removido com sucesso!")
-                return lista
-            else:
-                print(f"Índice inválido! Digite um número entre 1 e {len(lista)}")
-        except ValueError:
-            print("Entrada inválida! Digite apenas números.")
+def tutorial_login():
+    """Exibe um tutorial passo a passo para login"""
+    print("\nTUTORIAL DE LOGIN:")
+    print("1. Baixe o aplicativo da clínica.")
+    print("2. Clique no botão 'ENTRAR' no centro da tela.")
+    print("3. Insira seu CPF.")
+    print("4. Clique em 'Entrar'.")
 
-def buscar_item(lista):
-    """
-    Busca um item na lista e mostra sua posição
-    Parâmetros:
-        lista (list): Lista onde será feita a busca
-    """
-    if not lista:
-        print("A lista está vazia. Nada para buscar.")
-        return
-    
-    termo = input("Digite o termo de busca: ").strip().lower()
-    if not termo:
-        print("Termo de busca não pode ser vazio.")
-        return
-    
-    encontrados = [(i, item) for i, item in enumerate(lista, 1) if termo in item.lower()]
-    
-    if encontrados:
-        print("Itens encontrados:")
-        for i, item in encontrados:
-            print(f"{i}. {item}")
-    else:
-        print("Nenhum item encontrado com o termo fornecido.")
+def tutorial_chamada():
+    """Exibe um tutorial passo a passo para iniciar uma chamada"""
+    print("\nTUTORIAL DE CHAMADA:")
+    print("1. Faça entrada no sistema.")
+    print("2. Na página inicial, clique em 'Iniciar Chamada'.")
+    print("3. Permita o acesso ao microfone e câmera quando solicitado.")
+    print("4. Aguarde a conexão com o médico.")
+    print("5. Em caso de falha, reinicie o navegador ou aplicativo.")
 
-def listar_itens(lista):
-    """
-    Lista todos os itens da lista com suas posições
-    Parâmetros:
-        lista (list): Lista a ser exibida
-    """
-    if not lista:
-        print("A lista está vazia.")
-        return
-    
-    print("\nITENS NA LISTA:")
-    for i, item in enumerate(lista, 1):
-        print(f"{i}. {item}")
-    print(f"Total de itens: {len(lista)}")
+def chat_com_medico():
+    """Simula a abertura de um chat com o médico durante a consulta"""
+    print("\nSOLICITANDO CHAT COM O MÉDICO...")
+    print("Conectando você ao médico responsável...")
+    print("(Este chat só está disponível durante consultas ativas.)")
+    print("Se não estiver em consulta, contate o suporte técnico.")
 
 def falar_com_suporte():
     """
@@ -144,7 +92,6 @@ def falar_com_suporte():
 
 def main():
     """Função principal que gerencia o fluxo do programa"""
-    lista_itens = []
     opcoes_validas = range(1, 7)
     
     while True:
@@ -152,13 +99,13 @@ def main():
         opcao = validar_opcao(opcoes_validas)
         
         if opcao == 1:
-            lista_itens = adicionar_item(lista_itens)
+            solicitar_senha()
         elif opcao == 2:
-            lista_itens = remover_item(lista_itens)
+            tutorial_login()
         elif opcao == 3:
-            buscar_item(lista_itens)
+            tutorial_chamada()
         elif opcao == 4:
-            listar_itens(lista_itens)
+            chat_com_medico()
         elif opcao == 5:
             falar_com_suporte()
         elif opcao == 6:

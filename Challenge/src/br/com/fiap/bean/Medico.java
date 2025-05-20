@@ -3,7 +3,7 @@ package br.com.fiap.bean;
 public class Medico {
     private String nome;
     private String crm;
-    private AreaAtuacao especialidade;
+    private AreaAtuacao especialidade; 
 
     public Medico(String nome, String crm, AreaAtuacao especialidade) {
         this.nome = nome;
